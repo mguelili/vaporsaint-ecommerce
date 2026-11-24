@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Confirmed | VaporSaint.clo</title>
+  <link rel="stylesheet" href="css/styles.css?v=12">
+  <style>
+    /* ── Confirmation page ── */
+    .confirm-page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 20px 80px;
+      text-align: center;
+    }
+
+    /* Big checkmark */
+    .confirm-icon {
+      width: 80px; height: 80px;
+      background: var(--lime);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 28px;
+    }
+
+    .confirm-page .eyebrow { margin-bottom: 10px; }
+    .confirm-page h1 {
+      font-size: 52px; color: #fff;
+      line-height: 1; margin: 0 0 14px;
+    }
+    .confirm-page .sub {
+      font-size: 15px; color: #666;
+      max-width: 420px; margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    /* Order card */
+    .confirm-card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 14px;
+      padding: 28px 32px;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+    .confirm-card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 16px; border-bottom: 1px solid #1e1e1e;
+      margin-bottom: 16px;
+    }
+    .confirm-card-header .order-num {
+      font-size: 15px; font-weight: 700; color: #fff;
+    }
+    .confirm-card-header .order-status {
+      background: #182800; color: var(--lime);
+      border: 1px solid #3a5500; border-radius: 20px;
+      padding: 4px 14px; font-size: 11px;
+      text-transform: uppercase; letter-spacing: .08em; font-weight: 700;
+    }
+
+    /* Order items in confirmation */
+    .confirm-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+    .confirm-line {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .confirm-thumb {
+      width: 52px; height: 52px; background: #f5f5f5;
+      border-radius: 6px; overflow: hidden; flex-shrink: 0;
+    }
+    .confirm-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .confirm-line-info { flex: 1; }
+    .confirm-line-name { font-size: 13px; color: #fff; font-weight: 600; }
+    .confirm-line-qty  { font-size: 11px; color: #555; }
+    .confirm-line-price { font-size: 13px; color: #ccc; font-weight: 600; }
+
+    .confirm-divider { border: none; border-top: 1px solid #1e1e1e; margin: 16px 0; }
+
+    .confirm-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 7px 0; font-size: 14px; color: #777;
+    }
+    .confirm-row b { color: #fff; }
+    .confirm-row.total {
+      font-size: 17px; font-weight: 700; color: #fff;
+      padding-top: 14px; border-top: 1px solid #333; margin-top: 4px;
+    }
+    .confirm-row.total b { color: var(--lime); font-size: 20px; }
+
+    /* Delivery estimate */
+    .confirm-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .confirm-meta-item {
+      background: #0d0d0d; border: 1px solid #1e1e1e;
+      border-radius: 8px; padding: 14px 16px;
+    }
+    .confirm-meta-item small {
+      display: block; font-size: 10px; text-transform: uppercase;
+      letter-spacing: .09em; color: #555; margin-bottom: 5px;
+    }
+    .confirm-meta-item span { font-size: 13px; color: #ccc; font-weight: 600; }
+
+    /* CTA buttons */
+    .confirm-actions {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .confirm-actions .btn {
+      padding: 14px 28px;
+      font-size: 13px;
+      border-radius: 7px;
+    }
+    .btn-ghost-confirm {
+      display: inline-block;
+      padding: 14px 28px; font-size: 13px; border-radius: 7px;
+      border: 1px solid #333; color: #888; background: transparent;
+      text-transform: uppercase; letter-spacing: .08em; font-weight: bold;
+      cursor: pointer; text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost-confirm:hover { border-color: var(--lime); color: var(--lime); }
+
+    @media(max-width: 600px) {
+      .confirm-page h1 { font-size: 36px; }
+      .confirm-card { padding: 20px; }
+      .confirm-meta { grid-template-columns: 1fr; }
+      .confirm-actions { flex-direction: column; }
+      .confirm-actions .btn, .btn-ghost-confirm { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="index.html">VAPOR<span>SAINT</span>.CLO</a>
+    <button class="menu-btn" aria-label="Open navigation">☰</button>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="products.html#builder">Outfit Builder</a>
+      <a href="account.php">Account</a>
+      <a href="cart.html">Cart <b class="cart-count">0</b></a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="confirm-page">
+      <div class="confirm-icon">✓</div>
+      <p class="eyebrow">ORDER RECEIVED</p>
+      <h1>You're in<br>the club.</h1>
+      <p class="sub">Your VaporSaint order has been placed successfully. We'll get it out to you ASAP.</p>
+
+      <div class="confirm-card" id="confirm-card">
+        <!-- JS renders order details here -->
+        <div class="confirm-card-header">
+          <span class="order-num" id="confirm-order-num">Order #VS-2026-001</span>
+          <span class="order-status">Confirmed</span>
+        </div>
+        <div class="confirm-items" id="confirm-items"></div>
+        <hr class="confirm-divider">
+        <div class="confirm-row"><span>Subtotal</span><b id="confirm-subtotal">—</b></div>
+        <div class="confirm-row"><span>Delivery</span><b id="confirm-delivery">₱150</b></div>
+        <div class="confirm-row total"><span>Total Paid</span><b id="confirm-total">—</b></div>
+        <div class="confirm-meta">
+          <div class="confirm-meta-item">
+            <small>Estimated delivery</small>
+            <span>3–5 business days</span>
+          </div>
+          <div class="confirm-meta-item">
+            <small>Confirmation</small>
+            <span>Sent to your email</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="confirm-actions">
+        <a class="btn" href="products.html">Continue Shopping</a>
+        <a class="btn-ghost-confirm" href="account.php">View Account</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>VAPORSAINT.CLO <span>Thank you for choosing uncommon.</span></footer>
+
+  <script src="js/app.js"></script>
+  <script>renderConfirmation();</script>
+</body>
+</html>
